@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <h2>Air Quality</h2>
+    <p>Get an approximate air-quality estimate for your location or a city.</p>
+</div>
+
+<section class="air-quality-panel" data-air-quality data-level="loading" aria-labelledby="air-quality-title">
+    <div class="aqi-reading-panel">
+        <p class="aqi-eyebrow">AIR QUALITY ESTIMATE</p>
+        <h2 id="air-quality-title">Air quality now</h2>
+        <div class="aqi-gauge" id="aqi-gauge" style="--aqi-progress: 0%">
+            <div class="aqi-gauge-face">
+                <div class="aqi-score" id="aqi-score" aria-label="Current air quality index" aria-live="off">--</div>
+                <span class="aqi-gauge-label">Estimated U.S. AQI</span>
+            </div>
+        </div>
+        <p class="aqi-category" id="aqi-category">Finding your location</p>
+        <p class="aqi-scale">U.S. Air Quality Index</p>
+    </div>
+
+    <div class="aqi-details">
+        <div class="aqi-location-heading">
+            <div>
+                <h3 id="aqi-location">Nearby</h3>
+                <p id="aqi-updated" hidden></p>
+            </div>
+            <div class="aqi-location-actions">
+                <button type="button" class="aqi-refresh-button" id="refresh-aqi" disabled>Refresh AQI</button>
+                <button type="button" class="aqi-location-button" id="use-location">Use my location</button>
+            </div>
+        </div>
+
+        <form class="aqi-search" id="city-search">
+            <label class="visually-hidden" for="city-name">Search a city</label>
+            <input id="city-name" name="city" type="search" placeholder="Search any city worldwide" minlength="2" maxlength="100" autocomplete="off">
+            <button type="submit">Check city</button>
+        </form>
+
+        <p class="aqi-message" id="aqi-message" role="status" aria-live="polite">Requesting your location…</p>
+
+        <div class="aqi-pollutants" aria-label="Pollutant readings">
+            <div><span>Estimated PM2.5</span><strong id="pm25-value">--</strong><small>µg/m³</small></div>
+            <div><span>Estimated PM10</span><strong id="pm10-value">--</strong><small>µg/m³</small></div>
+        </div>
+
+        <p class="aqi-attribution">Approximate air-quality estimates via <a href="https://open-meteo.com/en/docs/air-quality-api" target="_blank" rel="noopener noreferrer">Open-Meteo</a>. Estimates are model-based and may differ from measurements at local monitoring stations. Place names: GeoNames.</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/air-quality.js') }}" defer></script>
+{% endblock %}

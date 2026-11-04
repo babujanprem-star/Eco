@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <h2>Contact Inbox</h2>
+    <p>Sender details and messages submitted through EcoAtmo.</p>
+</div>
+
+<section class="admin-inbox" aria-label="Contact submissions">
+    <p class="admin-inbox-summary">{{ total_messages }} message{% if total_messages != 1 %}s{% endif %} received</p>
+
+    <div class="countries-table-wrap">
+        <table class="countries-table admin-message-table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Received</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in messages %}
+                    <tr>
+                        <td class="country-name">{{ item.name }}</td>
+                        <td>{{ item.email }}</td>
+                        <td class="admin-message-body">{{ item.message }}</td>
+                        <td>{{ item.submitted_at }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td class="admin-message-empty" colspan="4">No contact messages have been submitted yet.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if page_count > 1 %}
+        <nav class="admin-pagination" aria-label="Contact inbox pages">
+            {% if page > 1 %}<a href="{{ url_for('admin_messages', page=page - 1) }}">Previous</a>{% endif %}
+            <span>Page {{ page }} of {{ page_count }}</span>
+            {% if page < page_count %}<a href="{{ url_for('admin_messages', page=page + 1) }}">Next</a>{% endif %}
+        </nav>
+    {% endif %}
+</section>
+{% endblock %}
