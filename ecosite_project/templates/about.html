@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <h2>About EcoAtmo</h2>
+    <p>Understand the air around you and discover practical ways to care for our shared environment.</p>
+</div>
+
+<section aria-labelledby="about-mission">
+    <h3 id="about-mission">Our purpose</h3>
+    <p>EcoAtmo makes environmental information approachable and useful. We bring air-quality readings and everyday sustainability ideas together so you can learn about local conditions and find small changes that fit your life.</p>
+    <p>We believe progress grows from informed choices. Checking air quality can help you understand changing conditions, while habits like walking or cycling for short trips, saving electricity, conserving water, and reusing materials can help reduce your impact over time.</p>
+</section>
+
+<section aria-labelledby="about-features">
+    <h3 id="about-features">What you can do here</h3>
+<div class="card-grid">
+    <article class="card">
+        <div class="icon" aria-hidden="true">🌬️</div>
+        <h3>Check air quality</h3>
+        <p>Look up current air-quality conditions near your location or search for a city. Read the U.S. AQI category alongside PM2.5 and PM10 readings.</p>
+    </article>
+    <article class="card">
+        <div class="icon" aria-hidden="true">🌍</div>
+        <h3>Explore global readings</h3>
+        <p>Browse and sort air-quality readings for country and territory reference points to explore how conditions vary around the world.</p>
+    </article>
+    <article class="card">
+        <div class="icon" aria-hidden="true">🌱</div>
+        <h3>Find everyday ideas</h3>
+        <p>Explore approachable suggestions for reducing waste, conserving resources, and making more sustainable choices in daily routines.</p>
+    </article>
+    <article class="card">
+        <div class="icon" aria-hidden="true">♻️</div>
+        <h3>Learn about the data</h3>
+        <p>Air-quality forecasts are provided by CAMS through Open-Meteo. Readings are estimates for specific places and times, not a substitute for official local health guidance.</p>
+    </article>
+</div>
+</section>
+
+<section aria-labelledby="about-next-steps">
+    <h3 id="about-next-steps">Start exploring</h3>
+    <p>Check the <a href="{{ url_for('air_quality') }}">air quality near you</a>, compare <a href="{{ url_for('countries') }}">global reference readings</a>, or browse our <a href="{{ url_for('services') }}">everyday sustainability ideas</a>.</p>
+</section>
+{% endblock %}

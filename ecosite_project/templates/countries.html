@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <h2>Countries</h2>
+    <p>Compare the current air-quality index at a reference point in each country and territory.</p>
+</div>
+
+<section class="countries-dashboard" aria-label="Country air-quality comparison">
+    <div class="countries-toolbar">
+        <div class="countries-filters">
+            <label for="country-search">Find a country
+                <input id="country-search" type="search" placeholder="Search by name or region" autocomplete="off">
+            </label>
+            <label for="country-sort">Sort countries
+                <select id="country-sort">
+                    <option value="name">Name, A to Z</option>
+                    <option value="highest">Highest AQI</option>
+                    <option value="lowest">Lowest AQI</option>
+                </select>
+            </label>
+        </div>
+        <button type="button" class="aqi-location-button countries-refresh" id="refresh-countries">Refresh readings</button>
+    </div>
+
+    <p class="countries-status" id="countries-status" role="status" aria-live="polite">Loading country reference points and current readings…</p>
+
+    <div class="countries-table-wrap">
+        <table class="countries-table">
+            <thead>
+                <tr>
+                    <th scope="col">Country or territory</th>
+                    <th scope="col">Region</th>
+                    <th scope="col">Reference-point AQI</th>
+                    <th scope="col">Level</th>
+                </tr>
+            </thead>
+            <tbody id="country-rows">
+                <tr><td colspan="4">Loading readings…</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="countries-attribution">AQI is a model-based U.S. Air Quality Index reading at one country reference coordinate, not a national average. Readings refresh about every 15 minutes. Country coordinates: <a href="https://github.com/mledoze/countries" target="_blank" rel="noopener noreferrer">mledoze/countries</a>. Air-quality data: CAMS via <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>.</p>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/countries.js') }}" defer></script>
+{% endblock %}
