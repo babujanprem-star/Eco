@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <h2>Our Ideas</h2>
+</div>
+
+<div class="card-grid">
+    <article class="card" role="button" tabindex="0" data-idea="bicycles" aria-haspopup="dialog" aria-controls="idea-dialog">
+        <div class="icon" aria-hidden="true">🚲</div>
+        <h3>Use bicycles</h3>
+        <p>Choose cycles for short distance travel.</p>
+    </article>
+    <article class="card" role="button" tabindex="0" data-idea="recycling" aria-haspopup="dialog" aria-controls="idea-dialog">
+        <div class="icon" aria-hidden="true">♻️</div>
+        <h3>Recycle waste</h3>
+        <p>Segregate and recycle to keep the environment clean.</p>
+    </article>
+    <article class="card" role="button" tabindex="0" data-idea="electricity" aria-haspopup="dialog" aria-controls="idea-dialog">
+        <div class="icon" aria-hidden="true">💡</div>
+        <h3>Save electricity</h3>
+        <p>Turn off lights and appliances when not in use.</p>
+    </article>
+    <article class="card" role="button" tabindex="0" data-idea="trees" aria-haspopup="dialog" aria-controls="idea-dialog">
+        <div class="icon" aria-hidden="true">🌱</div>
+        <h3>Plant trees</h3>
+        <p>Plant more trees and make our earth green.</p>
+    </article>
+    <article class="card" role="button" tabindex="0" data-idea="water" aria-haspopup="dialog" aria-controls="idea-dialog">
+        <div class="icon" aria-hidden="true">💧</div>
+        <h3>Conserve water</h3>
+        <p>Fix leaks and use only the water you need each day.</p>
+    </article>
+    <article class="card" role="button" tabindex="0" data-idea="reusables" aria-haspopup="dialog" aria-controls="idea-dialog">
+        <div class="icon" aria-hidden="true">🛍️</div>
+        <h3>Carry reusables</h3>
+        <p>Choose reusable bags, bottles, and cups to cut single-use waste.</p>
+    </article>
+</div>
+
+{% include "_idea_dialog.html" %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/ideas.js') }}" defer></script>
+{% endblock %}

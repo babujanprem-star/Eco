@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero" data-home-hero>
+    <div class="hero-text">
+        <h1>
+            <span class="hero-headline-line">Small Steps,</span>
+            <span class="hero-headline-line">Big Change <span class="hero-globe" aria-hidden="true">🌍</span></span>
+        </h1>
+        <p>Simple ideas for a better and greener future.</p>
+        <a href="{{ url_for('services') }}" class="btn-explore">Explore</a>
+    </div>
+    <div class="eco-scene" id="eco-scene">
+        <canvas id="eco-canvas" aria-label="Interactive three-dimensional sustainable landscape with trees, solar panels, and a wind turbine"></canvas>
+        <button class="eco-scene-reset" id="eco-scene-reset" type="button" title="Reset view" aria-label="Reset the landscape view">↻</button>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/eco-scene.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="contact-container">
+    <div class="page-header">
+        <h2>Contact Us</h2>
+        <svg class="contact-illustration" viewBox="0 0 180 110" role="img" aria-label="An envelope with a small green leaf">
+            <path class="contact-illustration-shadow" d="M26 84h128" />
+            <rect class="contact-illustration-paper" x="42" y="18" width="96" height="68" rx="5" />
+            <path class="contact-illustration-lines" d="M57 39h54M57 50h42" />
+            <path class="contact-illustration-envelope" d="M31 44 90 84l59-40v43a7 7 0 0 1-7 7H38a7 7 0 0 1-7-7z" />
+            <path class="contact-illustration-flap" d="m31 44 59 40 59-40" />
+            <path class="contact-illustration-stem" d="M90 42v-15" />
+            <path class="contact-illustration-leaf" d="M90 31c-19 0-27-10-25-23 15-1 25 6 25 23Zm1-8c1-13 9-20 23-19 1 13-7 20-23 19Z" />
+        </svg>
+        <p>We'd love to hear from you.</p>
+    </div>
+
+    {% set feedback = namespace(message=None) %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category in ['success', 'warning'] %}
+                    {% set feedback.message = message %}
+                {% else %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('contact') }}">
+        <div class="form-row">
+            <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <textarea name="message" class="form-control" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+</div>
+
+{% if feedback.message %}
+<dialog class="contact-thankyou" id="contact-thankyou" aria-labelledby="thankyou-title" aria-describedby="thankyou-message">
+    <div class="thankyou-content">
+        <svg class="thankyou-illustration" viewBox="0 0 220 150" aria-hidden="true" focusable="false">
+            <path d="M37 121h146" fill="none" stroke="#dce7dc" stroke-linecap="round" stroke-width="5" />
+            <rect x="67" y="27" width="94" height="70" rx="8" fill="#f5f2e7" stroke="#aabfab" stroke-width="2" />
+            <path d="M81 47h61M81 59h42" fill="none" stroke="#c6d1c5" stroke-linecap="round" stroke-width="4" />
+            <path d="m47 70 63 47 63-47v43a8 8 0 0 1-8 8H55a8 8 0 0 1-8-8z" fill="#dcebdd" stroke="#477754" stroke-linejoin="round" stroke-width="3" />
+            <path d="m47 70 63 47 63-47" fill="none" stroke="#477754" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" />
+            <path d="M110 42V24" fill="none" stroke="#397248" stroke-linecap="round" stroke-width="3" />
+            <path d="M110 31c-19 0-27-10-25-23 15-1 25 6 25 23Zm2-8c1-13 9-20 23-19 1 13-7 20-23 19Z" fill="#7eaa70" stroke="#397248" stroke-linejoin="round" stroke-width="2" />
+            <path d="m37 43 4 8 8 4-8 4-4 8-4-8-8-4 8-4zm145 10 3 6 6 3-6 3-3 6-3-6-6-3 6-3z" fill="#d5ad55" />
+        </svg>
+        <p class="thankyou-kicker">MESSAGE RECEIVED</p>
+        <h2 id="thankyou-title">Thank you for leaving a message!</h2>
+        <p class="thankyou-message" id="thankyou-message">{{ feedback.message }}</p>
+        <button class="thankyou-close" id="thankyou-close" type="button">Continue</button>
+    </div>
+</dialog>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/contact-thankyou.js') }}" defer></script>
+{% endblock %}
