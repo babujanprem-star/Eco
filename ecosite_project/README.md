@@ -19,7 +19,7 @@ This is a complete implementation of the EcoAtmo website built with **Flask**, *
 
 ## Deploying to Render
 
-The repository includes a Render Blueprint in `../render.yaml`. Push the repository to GitHub, then in Render choose **New +** > **Blueprint** and connect that repository. The Blueprint runs Flask with Gunicorn, generates a production secret key, and mounts persistent storage for contact messages. A paid web-service plan is required for persistent disks and may incur charges.
+The repository includes a Render Blueprint in `../render.yaml`. Push the repository to GitHub, then in Render choose **New +** > **Blueprint** and connect that repository. The Blueprint runs Flask with Gunicorn, generates a production secret key, and mounts a 1 GB persistent disk at `/var/data` for the SQLite database. The service uses Render's paid Starter plan; charges apply. Contact messages are stored at `/var/data/database.db` and persist across deploys and restarts. Deploy the updated Blueprint in Render to apply these settings.
 
 After deployment, set `ADMIN_USERNAME` and `ADMIN_PASSWORD` in the Render service's environment settings to enable the protected contact inbox. Set the SMTP variables below if you want contact submissions emailed to you. Do not commit credentials.
 

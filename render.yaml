@@ -3,14 +3,18 @@ services:
   - type: web
     name: ecoatmo
     runtime: python
-    plan: free
+    plan: starter
     rootDir: ecosite_project
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
+    disk:
+      name: ecoatmo-data
+      mountPath: /var/data
+      sizeGB: 1
     envVars:
       - key: ENVIRONMENT
         value: production
       - key: SECRET_KEY
         generateValue: true
       - key: DATABASE_PATH
-        value: /tmp/database.db
+        value: /var/data/database.db

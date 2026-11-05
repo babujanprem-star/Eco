@@ -189,13 +189,8 @@ def contact():
             flash("An error occurred. Please try again later.", "danger")
             return redirect(url_for('contact'))
 
-        delivery_status = send_contact_notification(name, email, message, submitted_at)
-        if delivery_status == "sent":
-            flash("Your message was sent and emailed to the EcoAtmo team. Thank you for contacting us.", "success")
-        elif delivery_status == "not_configured":
-            flash("Your message was saved, but email delivery is not configured on this server yet.", "warning")
-        else:
-            flash("Your message was saved, but the EcoAtmo team could not be notified by email.", "warning")
+        send_contact_notification(name, email, message, submitted_at)
+        flash("Your message has been received. Thank you for contacting us.", "success")
 
         return redirect(url_for('contact'))
 
